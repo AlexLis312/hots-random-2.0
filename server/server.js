@@ -3,18 +3,7 @@ import express from "express";
 import cors from "cors";
 import heroRoutes from "./routes/heroes.js";
 
-import sql from "./db.js";
-
 dotenv.config();
-
-(async () => {
-  try {
-    const test = await sql`SELECT NOW()`;
-    console.log("Supabase connected:", test);
-  } catch (err) {
-    console.error("DB connection failed:", err);
-  }
-})();
 
 const app = express();
 
@@ -32,7 +21,7 @@ app.use(
 app.use(express.json());
 app.use("/heroes", heroRoutes);
 
-const PORT = process.env.PORT || 6000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 console.log(process.env.POSTGRES_HOST);
 console.log(process.env.POSTGRES_USER);
