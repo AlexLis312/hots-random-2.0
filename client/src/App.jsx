@@ -1,64 +1,80 @@
 import { useState } from "react";
 
-function App() {
-  const backendUrl = "https://hots-random-api.onrender.com";
+const backendUrl = "https://hots-random-api.onrender.com";
+
+export default function App() {
   const [role, setRole] = useState("");
   const [universe, setUniverse] = useState("");
   const [hero, setHero] = useState(null);
-  // const [heroes, setHeroes] = useState([]);
-  // const [randomHero, setRandomHero] = useState(null);
-
-  // useEffect(() => {
-  //   fetch("https://hots-random-api.onrender.com/heroes")
-  //     .then((res) => res.json())
-  //     .then((data) => setHeroes(data));
-  // }, []);
+  const [loading, setLoading] = useState(false);
 
   const getRandomHero = async () => {
-    const params = new URLSearchParams();
+    setLoading(true);
 
+    const params = new URLSearchParams();
     if (role) params.append("role", role);
     if (universe) params.append("universe", universe);
 
-    const res = await fetch(`https://hots-random-api.onrender.com/random?${params}`);
-
-    const data = await res.json();
-    setHero(data);
+    try {
+      const res = await fetch(`${backendUrl}/heroes/random?${params}`);
+      const data = await res.json();
+      setHero(data);
+    } catch (err) {
+      console.error(err);
+      alert("Error fetching hero");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // const getRandomHero = () => {
-  //   fetch("https://hots-random-api.onrender.com/heroes/random")
-  //     .then((res) => res.json())
-  //     .then((data) => setRandomHero(data));
-  // };
+  const resetFilters = () => {
+    setRole("");
+    setUniverse("");
+  };
 
   return (
-    <div>
-      <h1>HOTS Random Hero</h1>
+    <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
+      <h1>🎲 Random Hero</h1>
 
-      <select onChange={(e) => setRole(e.target.value)}>
-        <option value="">Any Role</option>
-        <option value="tank">Tank</option>
-        <option value="healer">Healer</option>
-        <option value="dd">Damage</option>
-      </select>
+      {/* Фильтры */}
+      <div style={{ marginBottom: "10px" }}>
+        <select value={role} onChange={(e) => setRole(e.target.value)}>
+          <option value="">Any Role</option>
+          <option value="tank">Tank</option>
+          <option value="healer">Healer</option>
+          <option value="dd">Damage</option>
+        </select>
 
-      <select onChange={(e) => setUniverse(e.target.value)}>
-        <option value="">Any Universe</option>
-        <option value="warcraft">Warcraft</option>
-        <option value="diablo">Diablo</option>
-        <option value="starcraft">StarCraft</option>
-        <option value="overwatch">Overwatch</option>
-      </select>
+        <select
+          value={universe}
+          onChange={(e) => setUniverse(e.target.value)}
+          style={{ marginLeft: "10px" }}
+        >
+          <option value="">Any Universe</option>
+          <option value="warcraft">Warcraft</option>
+          <option value="diablo">Diablo</option>
+          <option value="starcraft">StarCraft</option>
+          <option value="overwatch">Overwatch</option>
+        </select>
+      </div>
 
-      <button onClick={getRandomHero}>🎲 Random Hero</button>
+      {/* Кнопки */}
+      <div style={{ marginBottom: "20px" }}>
+        <button onClick={getRandomHero} disabled={loading}>
+          {loading ? "Loading..." : "🎲 Get Random Hero"}
+        </button>
+        <button onClick={resetFilters} style={{ marginLeft: "10px" }}>
+          Reset Filters
+        </button>
+      </div>
 
+      {/* Результат */}
       {hero && (
-        <div>
+        <div style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "8px" }}>
           <img
             src={`${backendUrl}${hero.img_path}`}
             alt={hero.name}
-            style={{ maxWidth: "200px" }}
+            style={{ maxWidth: "100%", borderRadius: "8px" }}
           />
           <h3>{hero.name}</h3>
           <p>{hero.role}</p>
@@ -67,16 +83,6 @@ function App() {
           </a>
         </div>
       )}
-
-      {/* <h2>All Heroes</h2>
-
-      {heroes.map((hero) => (
-        <div key={hero.id}>
-          {hero.name} - {hero.role}
-        </div>
-      ))} */}
     </div>
   );
 }
-
-export default App;
