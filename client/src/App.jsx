@@ -25,7 +25,11 @@ function App() {
 
       {randomHero && (
         <div>
-          <img src={`${backendUrl}${randomHero.img_path}`} />
+          <img
+            src={`${backendUrl}${randomHero.img_path}`}
+            alt={randomHero.name}
+            style={{ maxWidth: "200px" }}
+          />
           <h3>{randomHero.name}</h3>
           <p>{randomHero.role}</p>
           <a href={randomHero.url}>Build Guide</a>
