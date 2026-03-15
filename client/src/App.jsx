@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 function App() {
+  const backendUrl = "https://auto-server-test.onrender.com";
   const [heroes, setHeroes] = useState([]);
   const [randomHero, setRandomHero] = useState(null);
 
@@ -24,7 +25,7 @@ function App() {
 
       {randomHero && (
         <div>
-          <img src={randomHero.img_path} />
+          <img src={backendUrl + randomHero.img_path} />
           <h3>{randomHero.name}</h3>
           <p>{randomHero.role}</p>
           <a href={randomHero.url}>Build Guide</a>
