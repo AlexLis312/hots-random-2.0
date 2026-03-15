@@ -17,6 +17,12 @@ export default function App() {
 
     try {
       const res = await fetch(`${backendUrl}/heroes/random?${params}`);
+      if (!res.ok) {
+        const errorData = await res.json();
+        console.error("Backend error:", errorData);
+        alert(errorData.message || "Error fetching hero");
+        return;
+      }
       const data = await res.json();
       setHero(data);
     } catch (err) {
