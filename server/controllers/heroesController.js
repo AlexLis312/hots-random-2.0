@@ -37,6 +37,6 @@ export const getRandomHero = async (req, res) => {
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.status(500).send("DB error");
+    res.status(500).json({ message: "DB error", error: err.message });
   }
 };
