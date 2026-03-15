@@ -23,11 +23,17 @@ function App() {
       <button onClick={getRandomHero}>🎲 Random Hero</button>
 
       {randomHero && (
-        <div>
-          <h2>{randomHero.name}</h2>
-          <p>{randomHero.role}</p>
-          <p>{randomHero.universe}</p>
+        <div className="hero-card">
+          <img src={hero.img_path} />
+          <h3>{hero.name}</h3>
+          <p>{hero.role}</p>
+          <a href={hero.url}>Build Guide</a>
         </div>
+        // <div>
+        //   <h2>{randomHero.name}</h2>
+        //   <p>{randomHero.role}</p>
+        //   <p>{randomHero.universe}</p>
+        // </div>
       )}
 
       <h2>All Heroes</h2>
