@@ -58,7 +58,7 @@ export default function App() {
       <h1>🎲 Random Hero</h1>
 
       {/* Фильтры */}
-      <div style={{ marginBottom: "10px" }}>
+      {/* <div style={{ marginBottom: "10px" }}>
         <select value={role} onChange={(e) => setRole(e.target.value)}>
           <option value="">Any Role</option>
           <option value="tank">Tank</option>
@@ -80,16 +80,16 @@ export default function App() {
           <option value="overwatch">Overwatch</option>
           <option value="nexus">Nexus</option>
         </select>
-      </div>
+      </div> */}
 
       {/* Кнопки */}
       <div style={{ marginBottom: "20px" }}>
-        <button onClick={getRandomHero} disabled={loading}>
+        {/* <button onClick={getRandomHero} disabled={loading}>
           {loading ? "Loading..." : "🎲 Get Random Hero"}
         </button>
         <button onClick={resetFilters} style={{ marginLeft: "10px" }}>
           Reset Filters
-        </button>
+        </button> */}
         <button onClick={getAllRandomHero} style={{ marginLeft: "10px" }}>
           All Random
         </button>
