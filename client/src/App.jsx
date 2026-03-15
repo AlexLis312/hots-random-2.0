@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  const backendUrl = "https://auto-server-test.onrender.com";
+  const backendUrl = "https://hots-random-api.onrender.com";
   const [heroes, setHeroes] = useState([]);
   const [randomHero, setRandomHero] = useState(null);
 
