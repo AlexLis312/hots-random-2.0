@@ -104,7 +104,6 @@ export default function App() {
             style={{ maxWidth: "100%", borderRadius: "8px" }}
           />
           <h3>{hero.name}</h3>
-          <p>{hero.role}</p>
           <a href={hero.url} target="_blank" rel="noopener noreferrer">
             Build Guide
           </a>
