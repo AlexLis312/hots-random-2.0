@@ -1,5 +1,6 @@
 import dotenv from "dotenv";
 import express from "express";
+import path from "path";
 import cors from "cors";
 import heroRoutes from "./routes/heroes.js";
 
@@ -18,6 +19,7 @@ app.use(
   }),
 );
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use("/heroes", heroRoutes);
 
