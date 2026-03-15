@@ -24,10 +24,10 @@ function App() {
 
       {randomHero && (
         <div>
-          <img src={hero.img_path} />
-          <h3>{hero.name}</h3>
-          <p>{hero.role}</p>
-          <a href={hero.url}>Build Guide</a>
+          <img src={randomHero.img_path} />
+          <h3>{randomHero.name}</h3>
+          <p>{randomHero.role}</p>
+          <a href={randomHero.url}>Build Guide</a>
         </div>
         // <div>
         //   <h2>{randomHero.name}</h2>
