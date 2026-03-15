@@ -18,6 +18,8 @@ export const getRandomHero = async (req, res) => {
     const role = req.query.role === "any" ? null : req.query.role || null;
     const universe = req.query.universe === "any" ? null : req.query.universe || null;
 
+    console.log("Role:", role, "Universe:", universe);
+
     const { rows } = await pool.query(
       `
       SELECT *
@@ -30,13 +32,15 @@ export const getRandomHero = async (req, res) => {
       [role, universe],
     );
 
+    console.log("Rows returned:", rows.length);
+
     if (!rows.length) {
       return res.status(404).json({ message: "Hero not found" });
     }
 
     res.json(rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error("DB ERROR:", err);
     res.status(500).json({ message: "DB error", error: err.message });
   }
 };
