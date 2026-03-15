@@ -32,13 +32,10 @@ function App() {
           />
           <h3>{randomHero.name}</h3>
           <p>{randomHero.role}</p>
-          <a href={randomHero.url}>Build Guide</a>
+          <a href={randomHero.url} target="_blank" rel="noopener noreferrer">
+            Build Guide
+          </a>
         </div>
-        // <div>
-        //   <h2>{randomHero.name}</h2>
-        //   <p>{randomHero.role}</p>
-        //   <p>{randomHero.universe}</p>
-        // </div>
       )}
 
       <h2>All Heroes</h2>
