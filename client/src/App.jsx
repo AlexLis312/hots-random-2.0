@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [heroes, setHeroes] = useState([]);
+  const [randomHero, setRandomHero] = useState(null);
 
   useEffect(() => {
     fetch("https://hots-random-api.onrender.com/heroes")
@@ -9,14 +10,31 @@ function App() {
       .then((data) => setHeroes(data));
   }, []);
 
+  const getRandomHero = () => {
+    fetch("https://hots-random-api.onrender.com/heroes/random")
+      .then((res) => res.json())
+      .then((data) => setRandomHero(data));
+  };
+
   return (
     <div>
-      <h1>HOTS Random Heroes</h1>
+      <h1>HOTS Random Hero</h1>
+
+      <button onClick={getRandomHero}>🎲 Random Hero</button>
+
+      {randomHero && (
+        <div>
+          <h2>{randomHero.name}</h2>
+          <p>{randomHero.role}</p>
+          <p>{randomHero.universe}</p>
+        </div>
+      )}
+
+      <h2>All Heroes</h2>
 
       {heroes.map((hero) => (
         <div key={hero.id}>
-          <h3>{hero.name}</h3>
-          <p>{hero.role}</p>
+          {hero.name} - {hero.role}
         </div>
       ))}
     </div>
