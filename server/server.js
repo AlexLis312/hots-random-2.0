@@ -3,7 +3,7 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import cors from "cors";
-import heroRoutes from "./routes/heroes.js";
+import heroRouter from "./routes/heroes.js";
 
 dotenv.config();
 
@@ -30,7 +30,7 @@ app.use(
 );
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use("/heroes", heroRoutes);
+app.use("/heroes", heroRouter);
 app.use(express.json());
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
