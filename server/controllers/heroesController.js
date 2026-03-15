@@ -1,18 +1,17 @@
 import sql from "../db.js";
 
-// READ
+// READ ALL
 export const getHeroes = async (req, res) => {
   try {
     const heroes = await sql`SELECT * FROM heroes`;
     res.json(heroes);
   } catch (err) {
     console.error(err);
-    res.status(500).send("DB error");
+    res.status(500).json({ message: "DB error", error: err.message });
   }
 };
 
-// RANDOM
-
+// RANDOM HERO
 export const getRandomHero = async (req, res) => {
   try {
     const role = req.query.role === "any" ? null : req.query.role || null;
@@ -20,25 +19,22 @@ export const getRandomHero = async (req, res) => {
 
     console.log("Role:", role, "Universe:", universe);
 
-    const { rows } = await pool.query(
-      `
+    const heroes = await sql`
       SELECT *
       FROM heroes
-      WHERE ($1::text IS NULL OR role = $1)
-      AND ($2::text IS NULL OR universe = $2)
+      WHERE (${role} IS NULL OR role = ${role})
+        AND (${universe} IS NULL OR universe = ${universe})
       ORDER BY RANDOM()
       LIMIT 1
-      `,
-      [role, universe],
-    );
+    `;
 
-    console.log("Rows returned:", rows.length);
+    console.log("Rows returned:", heroes.length);
 
-    if (!rows.length) {
+    if (!heroes.length) {
       return res.status(404).json({ message: "Hero not found" });
     }
 
-    res.json(rows[0]);
+    res.json(heroes[0]);
   } catch (err) {
     console.error("DB ERROR:", err);
     res.status(500).json({ message: "DB error", error: err.message });
