@@ -8,6 +8,21 @@ export default function App() {
   const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const getAllRandomHero = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`${backendUrl}/heroes/random/all`);
+      if (!res.ok) throw new Error("Failed to fetch hero");
+      const data = await res.json();
+      setHero(data);
+    } catch (err) {
+      console.error(err);
+      alert("Error fetching hero");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const getRandomHero = async () => {
     setLoading(true);
 
@@ -74,6 +89,9 @@ export default function App() {
         </button>
         <button onClick={resetFilters} style={{ marginLeft: "10px" }}>
           Reset Filters
+        </button>
+        <button onClick={getAllRandomHero} style={{ marginLeft: "10px" }}>
+          All Random
         </button>
       </div>
 
