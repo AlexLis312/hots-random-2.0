@@ -13,6 +13,12 @@ const PORT = process.env.PORT || 4000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+setInterval(
+  () => {
+    fetch("https://hots-random-api.onrender.com");
+  },
+  1000 * 60 * 3,
+);
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
