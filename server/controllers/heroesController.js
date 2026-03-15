@@ -15,13 +15,22 @@ export const getHeroes = async (req, res) => {
 
 export const getRandomHero = async (req, res) => {
   try {
-    const hero = await sql`
-      SELECT * FROM heroes
-      ORDER BY RANDOM()
-      LIMIT 1
-    `;
+    const role = req.query.role || null;
+    const universe = req.query.universe || null;
 
-    res.json(hero[0]);
+    const { rows } = await pool.query(
+      `
+    SELECT *
+    FROM heroes
+    WHERE ($1::text IS NULL OR role = $1)
+    AND ($2::text IS NULL OR universe = $2)
+    ORDER BY RANDOM()
+    LIMIT 1
+    `,
+      [role, universe],
+    );
+
+    res.json(rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).send("DB error");

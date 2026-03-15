@@ -31,12 +31,7 @@ app.use(
 );
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(express.json());
 app.use("/heroes", heroRoutes);
+app.use(express.json());
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
-console.log("Uploads folder path:", path.join(__dirname, "uploads"));
-console.log(process.env.POSTGRES_HOST);
-console.log(process.env.POSTGRES_USER);
-console.log(process.env.POSTGRES_PASSWORD);
-console.log(process.env.POSTGRES_PORT);

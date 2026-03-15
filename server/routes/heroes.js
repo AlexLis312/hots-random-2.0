@@ -5,8 +5,5 @@ const router = express.Router();
 
 router.get("/", getHeroes);
 router.get("/random", getRandomHero);
-// router.post("/", createUser);
-// router.put("/:id", updateHeroes);
-// router.delete("/:id", deleteUser);
 
 export default router;
