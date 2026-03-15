@@ -22,8 +22,8 @@ export const getRandomHero = async (req, res) => {
     const heroes = await sql`
       SELECT *
       FROM heroes
-      WHERE (${role} IS NULL OR role = ${role})
-        AND (${universe} IS NULL OR universe = ${universe})
+      WHERE (${role} IS NULL OR LOWER(role) = LOWER(${role}))
+        AND (${universe} IS NULL OR LOWER(universe) = LOWER(${universe}))
       ORDER BY RANDOM()
       LIMIT 1
     `;
