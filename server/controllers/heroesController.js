@@ -37,7 +37,7 @@ export const getRandomFromPool = async (req, res) => {
   try {
     const { ids } = req.body;
 
-    if (!ids || !ids.length) {
+    if (!ids || ids.length === 0) {
       return res.status(400).json({ message: "No heroes selected" });
     }
 
