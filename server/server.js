@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
+app.use(express.json());
 app.use(
   cors({
     origin: "*",
@@ -31,6 +32,5 @@ app.use(
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/heroes", heroRouter);
-app.use(express.json());
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
