@@ -77,10 +77,10 @@ export default function App() {
     }
   };
 
-  const resetFilters = () => {
-    setRole("");
-    setUniverse("");
-  };
+  // const resetFilters = () => {
+  //   setRole("");
+  //   setUniverse("");
+  // };
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
