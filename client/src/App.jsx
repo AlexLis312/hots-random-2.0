@@ -4,7 +4,6 @@ const backendUrl = "https://hots-random-api.onrender.com";
 
 export default function App() {
   const [heroes, setHeroes] = useState([]);
-  const [selected, setSelected] = useState([]);
   const [role, setRole] = useState("");
   const [universe, setUniverse] = useState("");
   const [hero, setHero] = useState(null);
@@ -15,23 +14,6 @@ export default function App() {
       .then((res) => res.json())
       .then((data) => setHeroes(data));
   }, []);
-
-  const toggleHero = (id) => {
-    setSelected((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
-  };
-
-  const getRandomFromPool = async () => {
-    const res = await fetch(`${backendUrl}/heroes/random/pool`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ids: selected }),
-    });
-
-    const data = await res.json();
-    setHero(data);
-  };
 
   const getAllRandomHero = async () => {
     setLoading(true);
@@ -81,17 +63,6 @@ export default function App() {
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero</h1>
-
-      {heroes.map((h) => (
-        <label key={h.id} style={{ display: "block" }}>
-          <input
-            type="checkbox"
-            checked={selected.includes(h.id)}
-            onChange={() => toggleHero(h.id)}
-          />
-          {h.name}
-        </label>
-      ))}
 
       {/* Фильтры */}
       {/* <div style={{ marginBottom: "10px" }}>
@@ -145,6 +116,13 @@ export default function App() {
           </a>
         </div>
       )}
+      {heroes.map((h) => (
+        <div key={h.id} style={{ display: "block" }}>
+          <li>
+            <p>{h.name}</p>
+          </li>
+        </div>
+      ))}
     </div>
   );
 }
