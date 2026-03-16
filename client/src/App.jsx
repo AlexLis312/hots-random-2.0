@@ -118,6 +118,9 @@ export default function App() {
         <button onClick={getAllRandomHero} style={{ marginLeft: "10px" }}>
           All Random
         </button>
+        <button onClick={getRandomFromPool} style={{ marginLeft: "10px" }}>
+          Pool Random
+        </button>
       </div>
 
       {/* Результат */}
