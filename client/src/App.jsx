@@ -6,9 +6,6 @@ export default function App() {
   const [hero, setHero] = useState(null);
   const [heroes, setHeroes] = useState([]);
   const [selected, setSelected] = useState([]);
-  const [role, setRole] = useState("");
-  const [universe, setUniverse] = useState("");
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch(`${backendUrl}/heroes`)
@@ -38,7 +35,6 @@ export default function App() {
   };
 
   const getAllRandomHero = async () => {
-    setLoading(true);
     try {
       const res = await fetch(`${backendUrl}/heroes/random/all`);
       if (!res.ok) throw new Error("Failed to fetch hero");
@@ -47,79 +43,16 @@ export default function App() {
     } catch (err) {
       console.error(err);
       alert("Error fetching hero");
-    } finally {
-      setLoading(false);
     }
   };
-
-  const getRandomHero = async () => {
-    setLoading(true);
-
-    const params = new URLSearchParams();
-    if (role) params.append("role", role);
-    if (universe) params.append("universe", universe);
-
-    try {
-      const res = await fetch(`${backendUrl}/heroes/random?${params}`);
-      if (!res.ok) {
-        const errorData = await res.json();
-        console.error("Backend error:", errorData);
-        alert(errorData.message || "Error fetching hero");
-        return;
-      }
-      const data = await res.json();
-      setHero(data);
-    } catch (err) {
-      console.error(err);
-      alert("Error fetching hero");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // const resetFilters = () => {
-  //   setRole("");
-  //   setUniverse("");
-  // };
 
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero</h1>
       <p>Selected heroes: {selected.length}</p>
 
-      {/* Фильтры */}
-      {/* <div style={{ marginBottom: "10px" }}>
-        <select value={role} onChange={(e) => setRole(e.target.value)}>
-          <option value="">Any Role</option>
-          <option value="tank">Tank</option>
-          <option value="bruiser">Bruiser</option>
-          <option value="support">Support</option>
-          <option value="healer">Healer</option>
-          <option value="dd">Damage</option>
-        </select>
-
-        <select
-          value={universe}
-          onChange={(e) => setUniverse(e.target.value)}
-          style={{ marginLeft: "10px" }}
-        >
-          <option value="">Any Universe</option>
-          <option value="warcraft">Warcraft</option>
-          <option value="diablo">Diablo</option>
-          <option value="starcraft">StarCraft</option>
-          <option value="overwatch">Overwatch</option>
-          <option value="nexus">Nexus</option>
-        </select>
-      </div> */}
-
       {/* Кнопки */}
       <div style={{ marginBottom: "20px" }}>
-        {/* <button onClick={getRandomHero} disabled={loading}>
-          {loading ? "Loading..." : "🎲 Get Random Hero"}
-        </button>
-        <button onClick={resetFilters} style={{ marginLeft: "10px" }}>
-          Reset Filters
-        </button> */}
         <button onClick={getAllRandomHero} style={{ marginLeft: "10px" }}>
           All Random
         </button>
@@ -152,13 +85,6 @@ export default function App() {
           {h.name}
         </label>
       ))}
-      {/* {heroes.map((h) => (
-        <div key={h.id} style={{ display: "block" }}>
-          <li>
-            <p>{h.name}</p>
-          </li>
-        </div>
-      ))} */}
     </div>
   );
 }
