@@ -128,16 +128,6 @@ export default function App() {
         </button>
       </div>
 
-      {heroes.map((h) => (
-        <label key={h.id} style={{ display: "block" }}>
-          <input
-            type="checkbox"
-            checked={selected.includes(h.id)}
-            onChange={() => toggleHero(h.id)}
-          />
-          {h.name}
-        </label>
-      ))}
       {/* Результат */}
       {hero && (
         <div style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "8px" }}>
@@ -152,6 +142,16 @@ export default function App() {
           </a>
         </div>
       )}
+      {heroes.map((h) => (
+        <label key={h.id} style={{ display: "block" }}>
+          <input
+            type="checkbox"
+            checked={selected.includes(h.id)}
+            onChange={() => toggleHero(h.id)}
+          />
+          {h.name}
+        </label>
+      ))}
       {/* {heroes.map((h) => (
         <div key={h.id} style={{ display: "block" }}>
           <li>
