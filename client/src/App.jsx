@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 const backendUrl = "https://hots-random-api.onrender.com";
 
 export default function App() {
+  const [hero, setHero] = useState(null);
   const [heroes, setHeroes] = useState([]);
   const [selected, setSelected] = useState([]);
   const [role, setRole] = useState("");
   const [universe, setUniverse] = useState("");
-  const [hero, setHero] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -21,6 +21,10 @@ export default function App() {
   };
 
   const getRandomFromPool = async () => {
+    if (selected.length === 0) {
+      alert("Select heroes first");
+      return;
+    }
     const res = await fetch(`${backendUrl}/heroes/random/pool`, {
       method: "POST",
       headers: {
@@ -81,6 +85,7 @@ export default function App() {
   return (
     <div style={{ maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero</h1>
+      <p>Selected heroes: {selected.length}</p>
 
       {/* Фильтры */}
       {/* <div style={{ marginBottom: "10px" }}>
@@ -123,6 +128,16 @@ export default function App() {
         </button>
       </div>
 
+      {heroes.map((h) => (
+        <label key={h.id} style={{ display: "block" }}>
+          <input
+            type="checkbox"
+            checked={selected.includes(h.id)}
+            onChange={() => toggleHero(h.id)}
+          />
+          {h.name}
+        </label>
+      ))}
       {/* Результат */}
       {hero && (
         <div style={{ border: "1px solid #ccc", padding: "10px", borderRadius: "8px" }}>
@@ -137,16 +152,6 @@ export default function App() {
           </a>
         </div>
       )}
-      {heroes.map((h) => (
-        <label key={h.id} style={{ display: "block" }}>
-          <input
-            type="checkbox"
-            checked={selected.includes(h.id)}
-            onChange={() => toggleHero(h.id)}
-          />
-          {h.name}
-        </label>
-      ))}
       {/* {heroes.map((h) => (
         <div key={h.id} style={{ display: "block" }}>
           <li>
