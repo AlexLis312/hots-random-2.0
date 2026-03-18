@@ -30,7 +30,6 @@ export default function App() {
     }
     setLoading(true);
     try {
-      console.log("Selected IDs:", selected);
       const { data, error } = await supabase.from("heroes").select("*").in("id", selected);
 
       if (error) throw error;
