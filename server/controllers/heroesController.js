@@ -44,7 +44,7 @@ export const getRandomFromPool = async (req, res) => {
     const heroes = await sql`
       SELECT *
       FROM heroes
-      WHERE id = ANY(${sql(ids)})
+      WHERE id = ANY(ids)
       ORDER BY RANDOM()
       LIMIT 1
     `;
