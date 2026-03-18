@@ -33,29 +33,29 @@ export const getAllRandomHero = async (req, res) => {
 };
 
 // RANDOM HERO FROM POOL
-export const getRandomFromPool = async (req, res) => {
-  try {
-    const { ids } = req.body;
+// export const getRandomFromPool = async (req, res) => {
+//   try {
+//     const { ids } = req.body;
 
-    if (!ids || ids.length === 0) {
-      return res.status(400).json({ message: "No heroes selected" });
-    }
+//     if (!ids || ids.length === 0) {
+//       return res.status(400).json({ message: "No heroes selected" });
+//     }
 
-    const heroes = await sql`
-      SELECT *
-      FROM heroes
-      WHERE id = ANY(ids)
-      ORDER BY RANDOM()
-      LIMIT 1
-    `;
+//     const heroes = await sql`
+//       SELECT *
+//       FROM heroes
+//       WHERE id = ANY(ids)
+//       ORDER BY RANDOM()
+//       LIMIT 1
+//     `;
 
-    if (!heroes.length) {
-      return res.status(404).json({ message: "Hero not found" });
-    }
+//     if (!heroes.length) {
+//       return res.status(404).json({ message: "Hero not found" });
+//     }
 
-    res.json(heroes[0]);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "DB error" });
-  }
-};
+//     res.json(heroes[0]);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "DB error" });
+//   }
+// };
