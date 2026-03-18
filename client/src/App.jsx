@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { supabase } from "./utils/supabase";
 
 const backendUrl = "https://hots-random-api.onrender.com";
 
@@ -29,14 +30,14 @@ export default function App() {
     }
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/heroes/random/pool`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ids: selected }),
-      });
-      if (!res.ok) throw new Error("Failed to fetch from pool");
-      const data = await res.json();
-      setHero(data);
+      const { data, error } = await supabase.from("heroes").select("*").in("id", selected);
+
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error("No heroes found");
+
+      const randomHero = data[Math.floor(Math.random() * data.length)];
+
+      setHero(randomHero);
     } catch (err) {
       console.error(err);
       alert("Error fetching hero from pool");
@@ -93,7 +94,6 @@ export default function App() {
             />
           )}
           <h3>{hero.name}</h3>
-          <p>{hero.role}</p>
           <a href={hero.url} target="_blank" rel="noopener noreferrer">
             Build Guide
           </a>
