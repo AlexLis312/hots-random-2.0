@@ -199,7 +199,7 @@ export default function App() {
       )}
 
       {/* Filtered Heroes */}
-      {filteredHeroes.map((h) => (
+      {/* {filteredHeroes.map((h) => (
         <div
           key={h.id}
           onClick={() => toggleHero(h.id)}
@@ -224,7 +224,7 @@ export default function App() {
           )}
           <div style={{ fontSize: "12px", marginTop: "5px" }}>{h.name}</div>
         </div>
-      ))}
+      ))} */}
 
       {/* Hero Picker */}
       <h3>Select Heroes for Pool</h3>
