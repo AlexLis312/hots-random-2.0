@@ -121,7 +121,11 @@ export default function App() {
 
       {/* Кнопки */}
       <div style={{ marginBottom: "20px" }}>
-        <button onClick={() => getFilteredRandomHero(role, universe)} disabled={loading}>
+        <button
+          style={{ color: "black" }}
+          onClick={() => getFilteredRandomHero(role, universe)}
+          disabled={loading}
+        >
           {loading ? "Loading..." : "🎯 Filtered Random"}
         </button>
         <br />
