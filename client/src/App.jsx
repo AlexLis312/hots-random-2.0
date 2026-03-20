@@ -104,6 +104,8 @@ export default function App() {
           <option value="">All Roles</option>
           <option value="tank">Tank</option>
           <option value="dd">Damage</option>
+          <option value="heal">Heal</option>
+          <option value="bruiser">Bruiser</option>
           <option value="support">Support</option>
         </select>
 
@@ -112,6 +114,8 @@ export default function App() {
           <option value="warcraft">Warcraft</option>
           <option value="diablo">Diablo</option>
           <option value="starcraft">StarCraft</option>
+          <option value="overwatch">OverWatch</option>
+          <option value="nexus">Nexus</option>
         </select>
       </div>
 
