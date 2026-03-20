@@ -200,7 +200,30 @@ export default function App() {
 
       {/* Filtered Heroes */}
       {filteredHeroes.map((h) => (
-        <div key={h.id}>{h.name}</div>
+        <div
+          key={h.id}
+          onClick={() => toggleHero(h.id)}
+          style={{
+            border: selected.includes(h.id) ? "3px solid #00f" : "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "5px",
+            cursor: "pointer",
+            width: "100px",
+            textAlign: "center",
+            transition: "all 0.2s",
+          }}
+        >
+          {h.img_path ? (
+            <img
+              src={`${backendUrl}${h.img_path}`}
+              alt={h.name}
+              style={{ width: "80px", borderRadius: "6px" }}
+            />
+          ) : (
+            <div style={{ width: "80px", height: "80px", background: "#eee" }} />
+          )}
+          <div style={{ fontSize: "12px", marginTop: "5px" }}>{h.name}</div>
+        </div>
       ))}
 
       {/* Hero Picker */}
