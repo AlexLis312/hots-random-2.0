@@ -4,6 +4,8 @@ import { supabase } from "./utils/supabase.js";
 const backendUrl = "https://hots-random-api.onrender.com";
 
 export default function App() {
+  const [search, setSearch] = useState("");
+  const [filteredHeroes, setFilteredHeroes] = useState([]);
   const [role, setRole] = useState("");
   const [universe, setUniverse] = useState("");
   const [hero, setHero] = useState(null);
@@ -18,6 +20,29 @@ export default function App() {
       .then((data) => setHeroes(data))
       .catch((err) => console.error(err));
   }, []);
+
+  useEffect(() => {
+    async function fetchFiltered() {
+      if (!search) {
+        setFilteredHeroes(heroes); // если пусто — показываем всех
+        return;
+      }
+
+      const { data, error } = await supabase
+        .from("heroes")
+        .select("*")
+        .ilike("name", `%${search}%`); // 🔥 поиск по подстроке
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      setFilteredHeroes(data || []);
+    }
+
+    fetchFiltered();
+  }, [search]);
 
   // Клик по герою для выбора/снятия
   const toggleHero = (id) => {
@@ -98,6 +123,14 @@ export default function App() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero Picker</h1>
+      {/* Фильтр */}
+      <input
+        type="text"
+        placeholder="Search hero..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
       {/* Выбор */}
       <div>
         <select onChange={(e) => setRole(e.target.value)}>
@@ -164,6 +197,11 @@ export default function App() {
           </a>
         </div>
       )}
+
+      {/* Filtered Heroes */}
+      {filteredHeroes.map((h) => (
+        <div key={h.id}>{h.name}</div>
+      ))}
 
       {/* Hero Picker */}
       <h3>Select Heroes for Pool</h3>
