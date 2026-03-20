@@ -120,6 +120,7 @@ export default function App() {
         <button onClick={() => getFilteredRandomHero(role, universe)} disabled={loading}>
           {loading ? "Loading..." : "🎯 Filtered Random"}
         </button>
+        <br />
         <button onClick={getAllRandomHero} disabled={loading}>
           {loading ? "Loading..." : "🎲 Full Random"}
         </button>
