@@ -4,6 +4,8 @@ import { supabase } from "./utils/supabase.js";
 const backendUrl = "https://hots-random-api.onrender.com";
 
 export default function App() {
+  const [role, setRole] = useState("");
+  const [universe, setUniverse] = useState("");
   const [hero, setHero] = useState(null);
   const [heroes, setHeroes] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -20,6 +22,37 @@ export default function App() {
   // Клик по герою для выбора/снятия
   const toggleHero = (id) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]));
+  };
+
+  // role/univers Random
+  const getFilteredRandomHero = async (role, universe) => {
+    setLoading(true);
+    try {
+      let query = supabase.from("heroes").select("*");
+
+      // фильтр по роли
+      if (role) {
+        query = query.eq("role", role);
+      }
+
+      // фильтр по вселенной
+      if (universe) {
+        query = query.eq("universe", universe);
+      }
+
+      const { data, error } = await query;
+
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error("No heroes found");
+
+      const randomHero = data[Math.floor(Math.random() * data.length)];
+      setHero(randomHero);
+    } catch (err) {
+      console.error(err);
+      alert("Error fetching hero");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Pool Random
@@ -65,9 +98,28 @@ export default function App() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero Picker</h1>
+      {/* Выбор */}
+      <div>
+        <select onChange={(e) => setRole(e.target.value)}>
+          <option value="">All Roles</option>
+          <option value="tank">Tank</option>
+          <option value="dd">Damage</option>
+          <option value="support">Support</option>
+        </select>
+
+        <select onChange={(e) => setUniverse(e.target.value)}>
+          <option value="">All Universes</option>
+          <option value="warcraft">Warcraft</option>
+          <option value="diablo">Diablo</option>
+          <option value="starcraft">StarCraft</option>
+        </select>
+      </div>
 
       {/* Кнопки */}
       <div style={{ marginBottom: "20px" }}>
+        <button onClick={() => getFilteredRandomHero(role, universe)} disabled={loading}>
+          {loading ? "Loading..." : "🎯 Filtered Random"}
+        </button>
         <button onClick={getAllRandomHero} disabled={loading}>
           {loading ? "Loading..." : "🎲 Full Random"}
         </button>
