@@ -1,3 +1,4 @@
+import "./styles/main.scss";
 import { useState, useEffect } from "react";
 import { supabase } from "./utils/supabase.js";
 
@@ -163,21 +164,8 @@ export default function App() {
 
       {/* Результат */}
       {hero && (
-        <div
-          style={{
-            border: "2px solid #ccc",
-            padding: "15px",
-            borderRadius: "10px",
-            marginBottom: "20px",
-          }}
-        >
-          {hero?.img_path && (
-            <img
-              src={`${backendUrl}${hero.img_path}`}
-              alt={hero.name}
-              style={{ maxWidth: "150px", borderRadius: "8px" }}
-            />
-          )}
+        <div className="hero-result">
+          {hero?.img_path && <img src={`${backendUrl}${hero.img_path}`} alt={hero.name} />}
           <h3>{hero.name}</h3>
           <a href={hero.url} target="_blank" rel="noopener noreferrer">
             Build Guide
@@ -189,27 +177,12 @@ export default function App() {
       <h3>Select Heroes for Pool</h3>
       <p>Selected: {selected.length}</p>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
-          gap: "10px",
-          justifyItems: "center",
-        }}
-      >
+      <div className="hero-grid">
         {(search ? filteredHeroes : heroes).map((h) => (
           <div
             key={h.id}
             onClick={() => toggleHero(h.id)}
-            style={{
-              border: selected.includes(h.id) ? "3px solid #00f" : "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "5px",
-              cursor: "pointer",
-              width: "100px",
-              textAlign: "center",
-              transition: "all 0.2s",
-            }}
+            className={`hero-card ${selected.includes(h.id) ? "selected" : ""}`}
           >
             {h.img_path ? (
               <img
@@ -220,7 +193,7 @@ export default function App() {
             ) : (
               <div style={{ width: "80px", height: "80px", background: "#eee" }} />
             )}
-            <div style={{ fontSize: "12px", marginTop: "5px" }}>{h.name}</div>
+            <div className="hero-name">{h.name}</div>
           </div>
         ))}
       </div>

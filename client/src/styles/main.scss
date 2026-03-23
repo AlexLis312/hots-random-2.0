@@ -1,0 +1,158 @@
+@import "./variables.scss";
+
+body {
+  margin: 0;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+h1 {
+  color: var(--accent);
+  font-size: 56px;
+  margin: 32px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+
+#root {
+  max-width: 1126px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+// Input Search
+input[type="text"] {
+  padding: 10px 15px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  width: 300px;
+  max-width: 90%;
+  margin-bottom: 20px;
+  font-size: 16px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-bg);
+  }
+}
+
+// Selects
+select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin: 0 5px;
+  font-size: 15px;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 6px var(--accent-bg);
+  }
+}
+
+// Buttons
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  background: var(--accent-bg);
+  color: var(--accent);
+  font-weight: 600;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  & + button {
+    margin-left: 10px;
+  }
+}
+
+// Hero Cards
+.hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 15px;
+  justify-items: center;
+}
+
+.hero-card {
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  padding: 5px;
+  width: 100px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: #f8f8f8;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow);
+  }
+
+  &.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-bg);
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .hero-name {
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-h);
+  }
+}
+
+// Result Hero
+.hero-result {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 20px;
+  display: inline-block;
+  text-align: center;
+  background: #fdfdfd;
+  box-shadow: var(--shadow);
+
+  img {
+    max-width: 150px;
+    border-radius: 8px;
+  }
+
+  a {
+    display: block;
+    margin-top: 5px;
+    color: var(--accent);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
