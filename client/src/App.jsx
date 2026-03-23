@@ -157,7 +157,7 @@ export default function App() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-
+      <br />
       {/* Результат */}
       {hero && (
         <div className="hero-result">
