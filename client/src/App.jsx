@@ -155,6 +155,7 @@ export default function App() {
         <button style={{ color: "black" }} onClick={getAllRandomHero} disabled={loading}>
           {loading ? "Loading..." : "🎲 Full Random"}
         </button>
+        <br />
         <button
           style={{ color: "black", marginLeft: "10px" }}
           onClick={getRandomFromPool}
