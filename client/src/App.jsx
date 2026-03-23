@@ -128,7 +128,7 @@ export default function App() {
           <img
             src={hotsIcon}
             alt="Heroes of the Storm icon"
-            style={{ width: "80px", height: "80px" }}
+            style={{ width: "80px", height: "80px", background: "none" }}
           />
         </span>
         Random Hero Picker
