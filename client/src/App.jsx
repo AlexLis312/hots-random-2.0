@@ -1,4 +1,5 @@
 import "./styles/main.scss";
+import hotsIcon from "./assets/hots-icon.jpg";
 import { useState, useEffect } from "react";
 import { supabase } from "./utils/supabase.js";
 
@@ -113,7 +114,25 @@ export default function App() {
 
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
-      <h1>🎲 Random Hero Picker</h1>
+      <h1>
+        <span
+          style={{
+            marginBottom: "20px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "10px",
+          }}
+        >
+          {" "}
+          <img
+            src={hotsIcon}
+            alt="Heroes of the Storm icon"
+            style={{ width: "50px", height: "50px" }}
+          />
+        </span>{" "}
+        Random Hero Picker
+      </h1>
 
       {/* Выбор */}
       <div>
