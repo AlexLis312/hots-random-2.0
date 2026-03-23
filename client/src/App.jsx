@@ -119,8 +119,8 @@ export default function App() {
           src={hotsIcon}
           alt="Heroes of the Storm icon"
           style={{
-            width: "80px",
-            height: "80px",
+            width: "70px",
+            height: "70px",
             background: "none",
             verticalAlign: "middle",
             marginRight: "8px",
