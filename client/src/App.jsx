@@ -22,27 +22,19 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    async function fetchFiltered() {
-      if (!search) {
-        setFilteredHeroes(heroes); // если пусто — показываем всех
-        return;
-      }
-
-      const { data, error } = await supabase
-        .from("heroes")
-        .select("*")
-        .ilike("name", `%${search}%`); // 🔥 поиск по подстроке
-
-      if (error) {
-        console.error(error);
-        return;
-      }
-
-      setFilteredHeroes(data || []);
+    if (!search) {
+      setFilteredHeroes(heroes);
+      return;
     }
 
+    const filtered = heroes.filter((hero) =>
+      hero.name.toLowerCase().includes(search.toLowerCase()),
+    );
+
+    setFilteredHeroes(filtered);
+
     fetchFiltered();
-  }, [search]);
+  }, [search, heroes]);
 
   // Клик по герою для выбора/снятия
   const toggleHero = (id) => {
@@ -199,7 +191,7 @@ export default function App() {
       )}
 
       {/* Filtered Heroes */}
-      {/* {filteredHeroes.map((h) => (
+      {filteredHeroes.map((h) => (
         <div
           key={h.id}
           onClick={() => toggleHero(h.id)}
@@ -224,7 +216,7 @@ export default function App() {
           )}
           <div style={{ fontSize: "12px", marginTop: "5px" }}>{h.name}</div>
         </div>
-      ))} */}
+      ))}
 
       {/* Hero Picker */}
       <h3>Select Heroes for Pool</h3>
