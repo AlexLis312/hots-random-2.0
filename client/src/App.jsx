@@ -31,7 +31,7 @@ export default function App() {
       hero.name.toLowerCase().includes(search.toLowerCase()),
     );
 
-    setHeroes(filtered);
+    setFilteredHeroes(filtered);
   }, [search, heroes]);
 
   // Клик по герою для выбора/снятия
@@ -188,37 +188,10 @@ export default function App() {
         </div>
       )}
 
-      {/* Filtered Heroes */}
-      {filteredHeroes.map((h) => (
-        <div
-          key={h.id}
-          onClick={() => toggleHero(h.id)}
-          style={{
-            border: selected.includes(h.id) ? "3px solid #00f" : "1px solid #ccc",
-            borderRadius: "8px",
-            padding: "5px",
-            cursor: "pointer",
-            width: "100px",
-            textAlign: "center",
-            transition: "all 0.2s",
-          }}
-        >
-          {h.img_path ? (
-            <img
-              src={`${backendUrl}${h.img_path}`}
-              alt={h.name}
-              style={{ width: "80px", borderRadius: "6px" }}
-            />
-          ) : (
-            <div style={{ width: "80px", height: "80px", background: "#eee" }} />
-          )}
-          <div style={{ fontSize: "12px", marginTop: "5px" }}>{h.name}</div>
-        </div>
-      ))}
-
-      {/* Hero Picker */}
+      {/* pool/filter */}
       <h3>Select Heroes for Pool</h3>
       <p>Selected: {selected.length}</p>
+
       <div
         style={{
           display: "grid",
@@ -227,7 +200,7 @@ export default function App() {
           justifyItems: "center",
         }}
       >
-        {heroes.map((h) => (
+        {(search ? filteredHeroes : heroes).map((h) => (
           <div
             key={h.id}
             onClick={() => toggleHero(h.id)}
