@@ -122,15 +122,15 @@ export default function App() {
             alignItems: "center",
             justifyContent: "center",
             gap: "10px",
+            background: "none",
           }}
         >
-          {" "}
           <img
             src={hotsIcon}
             alt="Heroes of the Storm icon"
-            style={{ width: "50px", height: "50px" }}
+            style={{ width: "80px", height: "80px" }}
           />
-        </span>{" "}
+        </span>
         Random Hero Picker
       </h1>
 
