@@ -32,8 +32,6 @@ export default function App() {
     );
 
     setFilteredHeroes(filtered);
-
-    fetchFiltered();
   }, [search, heroes]);
 
   // Клик по герою для выбора/снятия
