@@ -115,7 +115,9 @@ button {
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  background: #f8f8f8;
+
+  background: none;
+  color: var(--accent);
 
   &:hover {
     transform: scale(1.05);
