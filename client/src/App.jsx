@@ -113,13 +113,6 @@ export default function App() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
       <h1>🎲 Random Hero Picker</h1>
-      {/* Фильтр */}
-      <input
-        type="text"
-        placeholder="Search hero..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      />
 
       {/* Выбор */}
       <div>
@@ -160,6 +153,13 @@ export default function App() {
           {loading ? "Loading..." : "🎯 Pool Random"}
         </button>
       </div>
+      {/* Фильтр */}
+      <input
+        type="text"
+        placeholder="Search hero..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
       {/* Результат */}
       {hero && (
