@@ -156,11 +156,7 @@ export default function App() {
           {loading ? "Loading..." : "🎲 Full Random"}
         </button>
         <br />
-        <button
-          style={{ color: "black", marginLeft: "10px" }}
-          onClick={getRandomFromPool}
-          disabled={loading}
-        >
+        <button style={{ color: "black" }} onClick={getRandomFromPool} disabled={loading}>
           {loading ? "Loading..." : "🎯 Pool Random"}
         </button>
       </div>
