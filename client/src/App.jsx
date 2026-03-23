@@ -1,5 +1,5 @@
 import "./styles/main.scss";
-import hotsIcon from "./assets/hots-icon.png";
+import hotsIcon from "./assets/hotsIcon.png";
 import { useState, useEffect } from "react";
 import { supabase } from "./utils/supabase.js";
 
