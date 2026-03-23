@@ -31,7 +31,7 @@ export default function App() {
       hero.name.toLowerCase().includes(search.toLowerCase()),
     );
 
-    setFilteredHeroes(filtered);
+    setHeroes(filtered);
   }, [search, heroes]);
 
   // Клик по герою для выбора/снятия
