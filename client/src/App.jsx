@@ -1,5 +1,5 @@
 import "./styles/main.scss";
-import hotsIcon from "./assets/hots-icon.jpg";
+import hotsIcon from "./assets/hots-icon.png";
 import { useState, useEffect } from "react";
 import { supabase } from "./utils/supabase.js";
 
@@ -128,7 +128,7 @@ export default function App() {
           <img
             src={hotsIcon}
             alt="Heroes of the Storm icon"
-            style={{ width: "100px", height: "80px", background: "none" }}
+            style={{ width: "95px", height: "85px", background: "none" }}
           />
         </span>
         Random Hero Picker
