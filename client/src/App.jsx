@@ -150,6 +150,7 @@ export default function App() {
           {loading ? "Loading..." : "🎯 Pool Random"}
         </button>
       </div>
+
       {/* Фильтр */}
       <input
         type="text"
@@ -158,6 +159,7 @@ export default function App() {
         onChange={(e) => setSearch(e.target.value)}
       />
       <br />
+
       {/* Результат */}
       {hero && (
         <div className="hero-result">
