@@ -117,7 +117,6 @@ button {
   transition: all 0.2s;
 
   background: none;
-  color: var(--accent);
 
   &:hover {
     transform: scale(1.05);
@@ -140,7 +139,7 @@ button {
     margin-top: 5px;
     font-size: 12px;
     font-weight: 600;
-    color: var(--text-h);
+    color: var(--accent);
   }
 }
 
