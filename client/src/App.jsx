@@ -115,22 +115,17 @@ export default function App() {
   return (
     <div style={{ maxWidth: "800px", margin: "0 auto", textAlign: "center" }}>
       <h1>
-        <span
+        <img
+          src={hotsIcon}
+          alt="Heroes of the Storm icon"
           style={{
-            marginBottom: "20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "10px",
+            width: "80px",
+            height: "80px",
             background: "none",
+            verticalAlign: "middle",
+            marginRight: "8px",
           }}
-        >
-          <img
-            src={hotsIcon}
-            alt="Heroes of the Storm icon"
-            style={{ width: "80px", height: "80px", background: "none" }}
-          />
-        </span>
+        />
         Random Hero Picker
       </h1>
 
