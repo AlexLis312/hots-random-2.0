@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@use "./variables.scss";
 
 body {
   margin: 0;
@@ -43,6 +43,12 @@ body {
 .hero-result,
 .hero-pool {
   margin-bottom: 20px;
+}
+
+.app-message {
+  margin-bottom: 20px;
+  color: #ffd7d7;
+  font-weight: 600;
 }
 
 .filters__selects {

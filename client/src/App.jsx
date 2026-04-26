@@ -20,6 +20,7 @@ export default function App() {
   const [hero, setHero] = useState(null);
   const [selected, setSelected] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     async function loadHeroes() {
@@ -28,6 +29,7 @@ export default function App() {
         setHeroes(data);
       } catch (error) {
         console.error(error);
+        setErrorMessage("Could not load heroes.");
       }
     }
 
@@ -39,8 +41,10 @@ export default function App() {
       return heroes;
     }
 
+    const normalizedSearch = search.trim().toLowerCase();
+
     return heroes.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase()),
+      item.name.toLowerCase().startsWith(normalizedSearch),
     );
   }, [heroes, search]);
 
@@ -52,13 +56,14 @@ export default function App() {
 
   const handleFilteredRandom = async () => {
     setLoading(true);
+    setErrorMessage("");
 
     try {
       const randomHero = await getFilteredRandomHero(role, universe);
       setHero(randomHero);
     } catch (error) {
       console.error(error);
-      alert("Error fetching hero");
+      setErrorMessage("Could not fetch a filtered random hero.");
     } finally {
       setLoading(false);
     }
@@ -66,13 +71,14 @@ export default function App() {
 
   const handleFullRandom = async () => {
     setLoading(true);
+    setErrorMessage("");
 
     try {
       const randomHero = await getAllRandomHero();
       setHero(randomHero);
     } catch (error) {
       console.error(error);
-      alert("Error fetching hero");
+      setErrorMessage("Could not fetch a random hero.");
     } finally {
       setLoading(false);
     }
@@ -80,18 +86,19 @@ export default function App() {
 
   const handlePoolRandom = async () => {
     if (selected.length === 0) {
-      alert("Select heroes first!");
+      setErrorMessage("Select at least one hero first.");
       return;
     }
 
     setLoading(true);
+    setErrorMessage("");
 
     try {
       const randomHero = await getRandomFromPool(selected);
       setHero(randomHero);
     } catch (error) {
       console.error(error);
-      alert("Error fetching hero from pool");
+      setErrorMessage("Could not fetch a hero from the selected pool.");
     } finally {
       setLoading(false);
     }
@@ -116,6 +123,8 @@ export default function App() {
         onFullRandom={handleFullRandom}
         onPoolRandom={handlePoolRandom}
       />
+
+      {errorMessage && <p className="app-message">{errorMessage}</p>}
 
       <HeroResult hero={hero} />
 
