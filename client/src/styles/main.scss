@@ -1,6 +1,7 @@
 @use "./variables.scss";
 
 body {
+  min-height: 100vh;
   margin: 0;
   font-family: system-ui, "Segoe UI", Roboto, sans-serif;
   background-image:
@@ -9,10 +10,12 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   color: var(--accent);
 }
 
 #root {
+  min-height: 100vh;
   max-width: 1126px;
   margin: 0 auto;
   padding: 20px;
