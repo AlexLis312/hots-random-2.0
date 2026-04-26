@@ -1,16 +1,40 @@
-# React + Vite
+# HOTS Random 2.0
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web app for random hero selection in Heroes of the Storm.
 
-Currently, two official plugins are available:
+## Production
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Frontend: https://hots-random-2-0.vercel.app
+- Backend: https://hots-random-api.onrender.com
+- Database: Supabase
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The project uses a hybrid data flow:
 
-## Expanding the ESLint configuration
+- hero list is loaded through the backend API
+- full random hero is loaded through the backend API
+- filtered random hero is fetched directly from Supabase
+- pool random hero is fetched directly from Supabase
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Stack
+
+- React
+- Vite
+- SCSS
+- Express
+- Supabase
+- PostgreSQL
+
+## Environment Variables
+
+### Client
+
+- `VITE_API_URL`
+- `VITE_SUPABASE_URL`
+- `VITE_SUPABASE_PUBLISHABLE_DEFAULT_KEY`
+
+## Notes
+
+This project is built for online deployment, not only for local usage.
+Frontend is deployed on Vercel, backend on Render, and data is stored in Supabase.
